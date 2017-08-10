@@ -13,8 +13,6 @@ install:
 build_script:
   - npm install
 
-test_script:
-  - npm test
 
 deploy: off
 build: off
