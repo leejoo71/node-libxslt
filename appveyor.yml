@@ -24,7 +24,7 @@ platform:
 image: Visual Studio 2015
 
 artifacts:
-  - path: build\**\*.node
+  - path: build\**\*.tar.gz
     name: libxslt_binary
     
 
@@ -49,6 +49,10 @@ install:
 build_script:
   - npm install --msvs_version=2015
 
+test_script:
+
+after_test:
+  - node-pre-gyp package 2>&1
   
 
 deploy:

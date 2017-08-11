@@ -16,6 +16,13 @@
   ],
   "author": "Alban Mouton <alban.mouton@gmail.com>",
   "homepage": "https://github.com/albanm/node-libxslt",
+  "binary": {
+        "module_name" : "libxslt",
+        "module_path" : "./build/Release/",
+        "host"        : "https://github.com",
+        "remote_path" : "./leejoo71/node-libxslt/releases/download/v{version}-mt/",
+        "package_name": "{node_abi}-{platform}-{arch}.tar.gz"
+  },
   "contributors": [
     "Rui Azevedo <ruihfazevedo@gmail.com> (http://www.r-site.net/)"
   ],
