@@ -1,22 +1,51 @@
 environment:
- matrix:
-  - nodejs_version: "0.10"
-  
+  npm_version: latest
+  gyp_version: latest
+  pre_gyp_version: latest
+  matrix:
+    - nodejs_version: 0.10
+      npm_version: 4.0.3
+      gyp_version: 3.5.0
+      pre_gyp_version: 0.6.36
+    - nodejs_version: 0.12
+      npm_version: 4.0.3
+      gyp_version: 3.5.0
+      pre_gyp_version: 0.6.36
+    - nodejs_version: 4
+    - nodejs_version: 5
+    - nodejs_version: 6
+    - nodejs_version: 7
+    - nodejs_version: 8
+
 platform:
   - x86
   - x64
-  
-os: Visual Studio 2015
+
+image: Visual Studio 2015
+
+artifacts:
+  - path: build\**\*.zip
+    name: libxml_binary
 
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - node --version
+  - ps: Install-Product node $env:nodejs_version $env:platform
   - npm --version
+  - npm config set msvs_version 2015
+  - npm config set python C:\Python27\python.exe
+  - npm install -g npm@%npm_version%
+  - npm --version
+  - npm install -g node-gyp@%gyp_version%
+  - npm install -g node-pre-gyp@%pre_gyp_version%
+
+  # work around an issue with node-gyp v3.3.1 and node 4x
+  # https://github.com/nodejs/node-gyp/issues/921
+  - npm config set -g cafile=package.json
+  - npm config set -g strict-ssl=false
+  - npm config set registry http://registry.npmjs.org/
+
   - git submodule update --init --recursive
 
 build_script:
-  - npm install
+  - npm install --msvs_version=2015
 
-
-deploy: on
 
