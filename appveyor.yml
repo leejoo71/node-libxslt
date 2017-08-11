@@ -2,6 +2,9 @@ environment:
   npm_version: latest
   gyp_version: latest
   pre_gyp_version: latest
+  github_release_token:
+    secure: Bj8aZYnSEHCH1Aa+F6ZzVEZpKtXTj8OY4me6kJFokfs9/9UiMq10HFt7S+nHGm4y
+
   matrix:
     - nodejs_version: 0.10
       npm_version: 4.0.3
